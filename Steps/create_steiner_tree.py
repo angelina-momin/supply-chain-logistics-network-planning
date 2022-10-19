@@ -23,4 +23,5 @@ def create_steiner_tree_roads(graph, terminals):
     # the functions above create new graphs, which looses node attribute information
     nx.set_node_attributes(steiner_tree, graph.nodes)
 
+    # print("Steiner_tree", steiner_tree.edges)
     return steiner_tree

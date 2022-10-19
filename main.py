@@ -6,13 +6,13 @@ import math
 
 from Steps.create_graph_with_roads import create_graph_with_roads
 from Steps.create_steiner_tree import create_steiner_tree_roads
-from Utilities.change_graph_visuals import color_node, draw_with_color, color_edge
+from Utilities.graph_visuals_funcs import color_node, draw_with_color, color_edge
 
 from networkx.algorithms.approximation.steinertree import steiner_tree
 
 # Load utilities and other functions
 
-COST_PER_KM_LOCAL = 1
+COST_PER_KM_LOCAL = 5
 COST_PER_KM_EXPRESS = 1
 
 # FUNCTION
@@ -76,35 +76,10 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     Graph_steiner_tree = create_steiner_tree_roads(Graph_all_roads, terminals)
 
     ## STEP 2) Visualization
+    #plt.figure(figsize=(40, 40)).suptitle("Rahjeet's and Krishna's optimal tree")
+    draw_with_color(Graph_steiner_tree, all_nodes_with_coords, nodes_attributes)
 
-    # Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
-    # map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
-    #print("just before drawing", [(node, Graph_steiner_tree.nodes[node]) for node in Graph_steiner_tree])
+    # plt.set_xticks(range(0, 200))
+    # plt.set_yticks(range(0, 200))
 
-    #draw_with_color(steiner_tree(Graph_all_roads, terminals, weight='Distance'), all_nodes_with_coords, nodes_attributes)
-
-    plt.figure().suptitle("Optimal steiner")
-
-
-    opt_steiner_tree = steiner_tree(Graph_all_roads.copy(), terminals, weight = 'Distance')
-    print("optimal weight:", opt_steiner_tree.size("distance"))
-
-
-    print("Sucky netwrokx steiner", opt_steiner_tree.edges)
-    nx.draw_networkx(opt_steiner_tree,
-                     node_color=list(map(lambda node: color_node(node, opt_steiner_tree), opt_steiner_tree.nodes)),
-                     edge_color=list(map(lambda edge: color_edge(edge, opt_steiner_tree), opt_steiner_tree.edges)),
-                     pos=all_nodes_with_coords,
-                     with_labels=True
-                     )
-    plt.figure().suptitle("Rahjeet's and Krishna's optimal tree")
-
-    draw_with_color(
-        Graph_steiner_tree,
-        n
-    )
-    print("our shitty weight:", Graph_steiner_tree.size("distance"))
-
-
-    #draw_with_color(Graph_steiner_tree, all_nodes_with_coords, nodes_attributes)
     plt.show()
