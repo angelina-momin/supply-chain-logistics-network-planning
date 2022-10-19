@@ -6,9 +6,13 @@ import math
 
 from itertools import product
 
+from Steps.create_graph_with_roads import create_graph_with_roads
+
+
 # Load utilities and other functions
 
-
+COST_PER_KM_LOCAL = 1
+COST_PER_KM_EXPRESS = 1
 
 # FUNCTION
 
@@ -43,6 +47,13 @@ def city_planning(set_houses, set_malls, set_city_center):
     ---------------
     
     """
+
+    # I dunno angelina
+    first_graph = nx.Graph()
+    first_graph.add_nodes_from(set_houses, type="house")
+    first_graph.add_nodes_from(set_malls, type="mall")
+    first_graph.add_nodes_from(set_city_center, type="center") # TODO city center is not a set
+
     
     set_nodes = union(set_houses, set_malls, set_city_center)
     set_terminal_nodes = union(set_houses, set_city_center)
@@ -61,67 +72,25 @@ def city_planning(set_houses, set_malls, set_city_center):
     
     Graph_all_roads = create_graph_with_roads(set_nodes)
 
-    # STEP 1) For each mall, create a Steiner tree with
-    # Terminal_nodes: the mall itself, city center, all houses
-    # Optional_nodes: All other malls
+    # STEP 1) Create a steiner tree
+    # Terminal_nodes: all houses, city_centre (and hence atleast one mall to connect to the city center)
+    # Optional_nodes: malls
 
-    for mall in set_malls:   
+    terminal_nodes = union(set_houses, set_city_center)
+    optional_nodes = set_malls
 
-        set_nodes = union(mall, set_houses, set_city_center)
+    # Setting up the terminal and non terminal nodes
+    all_nodes = union(selected_mall, set_houses, set_mall, city_center)
+    terminal_nodes = union(set_houses, selected_mall)
 
-        Graph_all_roads = create_graph_with_roads(set_nodes)
-        Graph_MC_terminal = create_graph_MC(Graph_all_roads)
-        Graph_MST_terminal = create_MST(Graph_MC_terminal)
+    # Creating the steiner tree
+    Graph_steiner_tree = create_steiner_tree(terminals, optionals)
 
-        
-
-
-    # STEP 1) Construct a metric closure, Graph_MC_terminal, including only the terminal nodes
-    # We can use the function create_graph_with_roads again for this, the only difference being,
-    # we use the input set_terminal_nodes
+    ## STEP 2) Visualization
     
-    Graph_MC_terminal = create_graph_with_roads(set_terminal_nodes)
-
-    # STEP 2) Find an MST, Graph_MST_terminal, of the graph containing only the terminal nodes. 
-    # Graph_MST_terminal is generated from Graph_MC_terminal
-    
-    Graph_MST_terminal = create_MST(Graph_MC_terminal)
-
-    # STEP 3) Find and replace each edge in Graph_MST_terminal with a shortest path.
-    
-    # Do, in depth-first-search (DFS) order of MST_terminal
-    # For each edge, E = edge(node1, node2), find the shortest path
-    
-    for edge in MST_terminal:
-        node1, node2 = edge
-        shortest_path = find_shortest_path(node1, node2)
-        
-        # Members of the shortest_path already present in steiner_tree
-        nodes_in_steiner = member(shortest_path, steiner_tree)
-        
-        # STEP 3.1) Add the entire shortest path
-        
-        if length(nodes_in_steiner) < 2 
-            steiner_tree.add_edge(shortest_path)
-    
-        # STEP 3.2) Add subpath of the shortest path
-        
-        else:
-            first_node_in_steiner, last_node_in_steiner = nodes_in_steiner[0], nodes_in_steiner[n]
-            
-            # Add edges, hence subpaths from:
-                # node1 to first_node_in_steiner
-                # node2 to last_node_in_steiner
-            
-            steiner_tree.add_edge(node1, first_node_in_steiner)
-            steiner_tree.add_edge(node2, last_node_in_steiner)        
-        
-            
-    ## STEP 5) Create visualization
-    
-    nx.draw(Graph_all_roads)
+    nx.draw_networkx(Graph_all_roads)
     nx.draw(Graph_MC_terminal)
     nx.draw(Graph_MST_terminal)
-    nx.draw(steiner_tree)
+    nx.draw(Graph_steiner_tree)
     
-    return(steiner_tre)
+    return(Graph_steiner_tree)
