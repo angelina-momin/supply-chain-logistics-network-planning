@@ -76,4 +76,4 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
     map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
 
-    return draw_with_color(Graph_steiner_tree, all_nodes_with_coords)
+    return draw_with_color(first_graph, all_nodes_with_coords)
