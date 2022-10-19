@@ -27,6 +27,6 @@ def create_steiner_tree_roads(graph, terminals):
 
     # STEP 4) Find and replace each edge in Graph_MST_terminal with a shortest path.
 
-    steiner_tree = replace_with_shortest_roads(Graph_MST_terminals, Graph_original)
+    steiner_tree = replace_with_shortest_roads(Graph_MST_terminals, Graph_all_roads)
 
     return steiner_tree

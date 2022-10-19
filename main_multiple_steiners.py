@@ -20,7 +20,7 @@ def city_planning(set_houses, set_malls, set_city_center):
     
     Input:     
     set_houses- set of housing coordinates
-    set_malls- set of mall coordinates
+    coords_malls- set of mall coordinates
     set_city_center- city central coordinates 
     
     Output:

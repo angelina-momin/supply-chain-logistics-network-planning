@@ -7,7 +7,8 @@ import math
 from itertools import product
 
 from Steps.create_graph_with_roads import create_graph_with_roads
-
+from Steps.create_steiner_tree import create_steiner_tree_roads
+from Utilities.change_graph_visuals import color_node, draw_with_color
 
 # Load utilities and other functions
 
@@ -16,16 +17,16 @@ COST_PER_KM_EXPRESS = 1
 
 # FUNCTION
 
-def city_planning(set_houses, set_malls, set_city_center):
+def city_planning(coords_houses, coords_malls, coords_city_center):
     """
     ---------------
     Input & Output
     ---------------
     
     Input:     
-    set_houses- set of housing coordinates
-    set_malls- set of mall coordinates
-    set_city_center- city central coordinates 
+    coords_houses- set of housing coordinates
+    coords_malls- set of mall coordinates
+    coords_city_center- city central coordinates
     
     Output:
     steiner_tree- networkx graph which is a list of nodes and edges along with their weights
@@ -48,49 +49,32 @@ def city_planning(set_houses, set_malls, set_city_center):
     
     """
 
-    # I dunno angelina
+    house_nodes_with_coords = { f"H{index}": coords for index, coords in enumerate(coords_houses)}
+    mall_nodes_with_coords = { f"M{index}": coords for index, coords in enumerate(coords_malls)}
+    center_node_with_coords = { "C": coords_city_center }
+    all_nodes_with_coords = house_nodes_with_coords | mall_nodes_with_coords | center_node_with_coords
+
     first_graph = nx.Graph()
-    first_graph.add_nodes_from(set_houses, type="house")
-    first_graph.add_nodes_from(set_malls, type="mall")
-    first_graph.add_nodes_from(set_city_center, type="center") # TODO city center is not a set
-
-    
-    set_nodes = union(set_houses, set_malls, set_city_center)
-    set_terminal_nodes = union(set_houses, set_city_center)
-    
-    # All the graphs we need
-    Graph_all_roads = nx.Graph()
-    Graph_MC_terminal = nx.Graph()
-    Graph_MST_terminal= nx.Graph()
-    Graph_steiner_tree = nx.Graph()
-
-    # Empty list containing all graphs
-
-    all_graphs = {}
+    first_graph.add_nodes_from(house_nodes_with_coords.keys(), type="house")
+    first_graph.add_nodes_from(mall_nodes_with_coords.keys(), type="mall")
+    first_graph.add_node(center_node_with_coords.keys(), type="center")
 
     # STEP 0) Create a regular graph with all the possible local_roads and express_roads
-    
-    Graph_all_roads = create_graph_with_roads(set_nodes)
+
+    Graph_all_roads = create_graph_with_roads(first_graph)
 
     # STEP 1) Create a steiner tree
-    # Terminal_nodes: all houses, city_centre (and hence atleast one mall to connect to the city center)
+    # Terminal_nodes: all houses, city_centre
     # Optional_nodes: malls
 
-    terminal_nodes = union(set_houses, set_city_center)
-    optional_nodes = set_malls
-
-    # Setting up the terminal and non terminal nodes
-    all_nodes = union(selected_mall, set_houses, set_mall, city_center)
-    terminal_nodes = union(set_houses, selected_mall)
+    terminals = house_nodes_with_coords.keys() | center_node_with_coords.keys()
 
     # Creating the steiner tree
-    Graph_steiner_tree = create_steiner_tree(terminals, optionals)
+    Graph_steiner_tree = create_steiner_tree_roads(Graph_all_roads, terminals)
 
     ## STEP 2) Visualization
-    
-    nx.draw_networkx(Graph_all_roads)
-    nx.draw(Graph_MC_terminal)
-    nx.draw(Graph_MST_terminal)
-    nx.draw(Graph_steiner_tree)
-    
+
+    Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
+    map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
+
     return(Graph_steiner_tree)
