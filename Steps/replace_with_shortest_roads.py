@@ -28,8 +28,10 @@ def replace_with_shortest_roads(Graph_MST_terminals, Graph_original):
         node1, node2 = edge
 
         # STEP 1) Find the shortest path between the nodes
+        print("edges", Graph_original.edges)
         shortest_path = nx.dijkstra_path(Graph_original, node1, node2)
 
+        print("Shortest path", shortest_path)
         # STEP 2) Check which nodes in the shortest path are already present in the steiner_tree
 
         nodes_in_steiner = [node for node in shortest_path if node in Graph_steiner.nodes]
@@ -54,7 +56,7 @@ def replace_with_shortest_roads(Graph_MST_terminals, Graph_original):
             subpath_before = shortest_path[0:nodes_in_steiner.index(first_node_in_steiner)]
             subpath_after = shortest_path[nodes_in_steiner.index(last_node_in_steiner):len(shortest_path)]
 
-            Graph_steiner.add_path(subpath_before)
-            Graph_steiner.add_path(subpath_after)
+            nx.add_path(Graph_steiner, subpath_before)
+            nx.add_path(Graph_steiner, subpath_after)
 
     return Graph_steiner

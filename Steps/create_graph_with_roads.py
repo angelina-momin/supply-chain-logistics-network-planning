@@ -50,7 +50,7 @@ def create_graph_with_roads(graph, coordinates, cost_km_LR, cost_km_ER):
     # Step 1 oles suggestion
     for source in Graph_all_roads.nodes:
         for destination in Graph_all_roads.nodes:
-            if Graph_all_roads.has_edge(source, destination):
+            if source == destination or Graph_all_roads.has_edge(source, destination):
                 continue
 
             ## Step 2.2) Calculating the road_weight
@@ -67,9 +67,17 @@ def create_graph_with_roads(graph, coordinates, cost_km_LR, cost_km_ER):
             source_attrs = Graph_all_roads.nodes[source]
             destination_attrs = Graph_all_roads.nodes[destination]
 
-            if source_attrs["building_type"] == "mall" and destination_attrs["building_type"] == "mall":
+            house_and_house = source_attrs["building_type"] == "house" and destination_attrs["building_type"] == "house"
+            house_and_mall = source_attrs["building_type"] == "house" and destination_attrs["building_type"] == "mall"
+            mall_and_house = source_attrs["building_type"] == "mall" and destination_attrs["building_type"] == "house"
+            mall_and_mall = source_attrs["building_type"] == "mall" and destination_attrs["building_type"] == "mall"
+            mall_and_center = source_attrs["building_type"] == "mall" and destination_attrs["building_type"] == "center"
+            center_and_mall = source_attrs["building_type"] == "center" and destination_attrs["building_type"] == "mall"
+
+            if mall_and_mall or mall_and_center or center_and_mall:
                 Graph_all_roads.add_edge(source, destination, road="express", weight=eucl_dist * cost_km_ER)
-            else:
+
+            elif house_and_house or house_and_mall or mall_and_house:
                 Graph_all_roads.add_edge(source, destination, road="local", weight=eucl_dist * cost_km_LR)
 
     return Graph_all_roads

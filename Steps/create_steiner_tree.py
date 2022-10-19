@@ -20,4 +20,7 @@ def create_steiner_tree_roads(graph, terminals):
 
     steiner_tree = replace_with_shortest_roads(Graph_MST_terminals, graph)
 
+    # the functions above create new graphs, which looses node attribute information
+    nx.set_node_attributes(steiner_tree, graph.nodes)
+
     return steiner_tree

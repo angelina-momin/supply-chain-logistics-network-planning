@@ -57,7 +57,8 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     first_graph.add_nodes_from(list(mall_nodes_with_coords.keys()), building_type="mall")
     first_graph.add_nodes_from(list(house_nodes_with_coords.keys()), building_type="house")
     first_graph.add_node("C", building_type="center")
-    print(first_graph, first_graph.nodes)
+
+    nodes_attributes = first_graph.nodes()
 
     # STEP 0) Create a regular graph with all the possible local_roads and express_roads
 
@@ -76,5 +77,6 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
 
     # Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
     # map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
+    print("just before drawing", [(node, Graph_steiner_tree.nodes[node]) for node in Graph_steiner_tree])
 
-    return draw_with_color(first_graph, all_nodes_with_coords)
+    return draw_with_color(Graph_steiner_tree, all_nodes_with_coords, nodes_attributes)
