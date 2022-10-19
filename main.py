@@ -4,8 +4,6 @@ import numpy as np
 import networkx as nx
 import math
 
-from itertools import product
-
 from Steps.create_graph_with_roads import create_graph_with_roads
 from Steps.create_steiner_tree import create_steiner_tree_roads
 from Utilities.change_graph_visuals import color_node, draw_with_color
@@ -55,19 +53,20 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     all_nodes_with_coords = house_nodes_with_coords | mall_nodes_with_coords | center_node_with_coords
 
     first_graph = nx.Graph()
-    first_graph.add_nodes_from(house_nodes_with_coords.keys(), type="house")
-    first_graph.add_nodes_from(mall_nodes_with_coords.keys(), type="mall")
-    first_graph.add_node(center_node_with_coords.keys(), type="center")
+
+    first_graph.add_nodes_from(list(mall_nodes_with_coords.keys()), type="mall")
+    first_graph.add_nodes_from(list(house_nodes_with_coords.keys()), type="house")
+    first_graph.add_node("C", type="center")
 
     # STEP 0) Create a regular graph with all the possible local_roads and express_roads
 
-    Graph_all_roads = create_graph_with_roads(first_graph)
+    Graph_all_roads = create_graph_with_roads(first_graph, all_nodes_with_coords, COST_PER_KM_LOCAL, COST_PER_KM_EXPRESS)
 
     # STEP 1) Create a steiner tree
     # Terminal_nodes: all houses, city_centre
     # Optional_nodes: malls
 
-    terminals = house_nodes_with_coords.keys() | center_node_with_coords.keys()
+    terminals = list(house_nodes_with_coords.keys() | center_node_with_coords.keys())
 
     # Creating the steiner tree
     Graph_steiner_tree = create_steiner_tree_roads(Graph_all_roads, terminals)
@@ -77,4 +76,4 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
     map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
 
-    return(Graph_steiner_tree)
+    return draw_with_color(Graph_steiner_tree, all_nodes_with_coords)

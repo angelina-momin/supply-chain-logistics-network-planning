@@ -4,7 +4,7 @@ def color_node(node):
         return '0' # black
     elif node["type"] == "mall":
         return 'r'
-    else node["type"] == "center":
+    else:
         return 'b'
 
 

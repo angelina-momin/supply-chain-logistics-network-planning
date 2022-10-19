@@ -1,10 +1,8 @@
 import networkx as nx
 import math
 
-from main import COST_PER_KM_LOCAL, COST_PER_KM_EXPRESS
 
-
-def create_graph_with_roads(graph):
+def create_graph_with_roads(graph, coordinates, cost_km_LR, cost_km_ER):
     """
     ---------------
     Input & Output
@@ -57,16 +55,21 @@ def create_graph_with_roads(graph):
 
             ## Step 2.2) Calculating the road_weight
             # Edge weight = euclidean distance * cost_road_type
+            source_coordinate = coordinates[source]
+            destination_coordinate = coordinates[destination]
 
-            x1, y1 = source[0], source[1]
-            x2, y2 = destination[0], destination[1]
+            x1, y1 = source_coordinate[0], source_coordinate[1]
+            x2, y2 = destination_coordinate[0], destination_coordinate[1]
 
             # Calculating euclidean distance
-            eucl_dist = math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+            eucl_dist = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
-            if source.type == "mall" and destination.type == "mall":
-                Graph_all_roads.add_edge(source, destination, road="express", weight=eucl_dist * COST_PER_KM_LOCAL)
+            source_attrs = Graph_all_roads.nodes[source]
+            destination_attrs = Graph_all_roads.nodes[destination]
+
+            if source_attrs["type"] == "mall" and destination_attrs["type"] == "mall":
+                Graph_all_roads.add_edge(source, destination, road="express", weight=eucl_dist * cost_km_ER)
             else:
-                Graph_all_roads.add_edge(source, destination, road="local", weight=eucl_dist * COST_PER_KM_EXPRESS)
+                Graph_all_roads.add_edge(source, destination, road="local", weight=eucl_dist * cost_km_LR)
 
     return Graph_all_roads

@@ -39,7 +39,7 @@ def replace_with_shortest_roads(Graph_MST_terminals, Graph_original):
         # Step 3.1) Add the entire path
 
         if len(nodes_in_steiner) < 2:
-            Graph_steiner.add_path(shortest_path)
+            nx.add_path(Graph_steiner, shortest_path)
 
         # Step 3.2) Add subpath of the shortest path
 
