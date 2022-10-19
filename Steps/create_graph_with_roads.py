@@ -17,7 +17,7 @@ def create_graph_with_roads(graph, coordinates, cost_km_LR, cost_km_ER):
     cost_km_ER- cost per km of express roads
     
     Output:  Graph_all_roads.  Graph consisting of all the nodes with edges 
-    of edge_weight = euclidean distance * cost_per_km of the specific road type
+    of edge_weight = euclidean distance * cost_per_km of the specific road building_type
         
     ---------------
     Description
@@ -67,7 +67,7 @@ def create_graph_with_roads(graph, coordinates, cost_km_LR, cost_km_ER):
             source_attrs = Graph_all_roads.nodes[source]
             destination_attrs = Graph_all_roads.nodes[destination]
 
-            if source_attrs["type"] == "mall" and destination_attrs["type"] == "mall":
+            if source_attrs["building_type"] == "mall" and destination_attrs["building_type"] == "mall":
                 Graph_all_roads.add_edge(source, destination, road="express", weight=eucl_dist * cost_km_ER)
             else:
                 Graph_all_roads.add_edge(source, destination, road="local", weight=eucl_dist * cost_km_LR)

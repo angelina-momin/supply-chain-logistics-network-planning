@@ -54,9 +54,10 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
 
     first_graph = nx.Graph()
 
-    first_graph.add_nodes_from(list(mall_nodes_with_coords.keys()), type="mall")
-    first_graph.add_nodes_from(list(house_nodes_with_coords.keys()), type="house")
-    first_graph.add_node("C", type="center")
+    first_graph.add_nodes_from(list(mall_nodes_with_coords.keys()), building_type="mall")
+    first_graph.add_nodes_from(list(house_nodes_with_coords.keys()), building_type="house")
+    first_graph.add_node("C", building_type="center")
+    print(first_graph, first_graph.nodes)
 
     # STEP 0) Create a regular graph with all the possible local_roads and express_roads
 
@@ -73,7 +74,7 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
 
     ## STEP 2) Visualization
 
-    Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
-    map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
+    # Graphs_to_draw = [first_graph, Graph_all_roads, Graph_steiner_tree]
+    # map(lambda graph: draw_with_color(graph, all_nodes_with_coords), Graphs_to_draw)
 
     return draw_with_color(first_graph, all_nodes_with_coords)

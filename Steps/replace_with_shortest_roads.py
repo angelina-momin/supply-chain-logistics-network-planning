@@ -25,7 +25,7 @@ def replace_with_shortest_roads(Graph_MST_terminals, Graph_original):
     for edge in nx.edge_dfs(Graph_MST_terminals):
 
         # STEP 0) Identify the nodes connected by the edge
-        node1, node2 = edge[0], edge[1]
+        node1, node2 = edge
 
         # STEP 1) Find the shortest path between the nodes
         shortest_path = nx.dijkstra_path(Graph_original, node1, node2)
