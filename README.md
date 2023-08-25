@@ -1,16 +1,68 @@
 
 ## 📑 Table of contents
-* [About the project](#about-the-project)
-* [Getting started](#getting-started)
-* [Contributing](#contributing)
-* [Contact](#contact)
+- [🏙️ Introduction](#-introduction)
+  - [🛣️ Road Types](#-road-types)
+- [🖥️ Computational Task](#-computational-task)
+  - [🎯 Objective](#-objective)
+  - [📌 Inputs](#-inputs)
+  - [📄 Outputs](#-outputs)
+- [⚙️ Game Rules](#-game-rules)
+- [💡 Considerations for Optimization](#-considerations-for-optimization)
+- [📈 Visualization](#-visualization)
+- [🚀 Getting Started](#-getting-started)
+- [🤝 Contributing](#-contributing)
+- [📞 Contact](#-contact)
 
 
 <!-- ABOUT THE PROJECT -->
 ## 🏙️ About the project
+The project tackles a town road planning problem. In a newly built town with houses, shopping malls, and a centralized city center, roads are the essential backbone that determine its livability and functionality. As urban planners, the task is to intelligently lay down the roads, optimizing for cost and accessibility.
 
+### 🛣️ Road Types:
 
+1. **Local Roads**: 
+   - Connect houses to other houses.
+   - Link houses to malls.
+   
+2. **Express Roads**:
+   - Bridge malls with other malls.
+   - Route malls to the city center.
 
+<!-- ALGORITHMIC DESIGN -->
+## 🖥️ The Algorithmic Design
+
+### 🎯 Objective:
+Develop an algorithm that efficiently plans the roads, considering various cost scenarios.
+
+### 📌 Inputs:
+- `N` house coordinates `(x,y)`.
+- `M` mall coordinates `(x,y)`.
+- City center coordinates `(x,y)`.
+
+### 📄 Outputs:
+- A list of planned local roads.
+- A list of planned express roads.
+- Total length of the planned local roads.
+- Total length of the planned express roads.
+- A visualization of the proposed solution.
+
+<!-- GAME RULES -->
+## ⚙️ Game Rules:
+
+- **Connectivity**: Every house must connect to every other house.
+- **Access to Amenities**: Each house should have a route to at least one mall.
+- **Central Access**: Every house must have a road leading to the city center.
+- **Travel Definition**: Traveling encompasses moving via local or express roads, and possibly via other houses or malls as intermediaries.
+- **Mall Requirement**: Not all malls need a connection.
+- **Size Constraints**: Both M and N are expected to be of the order of 10.
+
+<!-- CONSIDERATIONS FOR OPTIMIZATION -->
+## 💡 Considerations for Optimization:
+
+The algorithm should optimize the road planning based on the following scenarios:
+1. When local roads are much cheaper to build than express roads.
+2. When local roads are much more expensive than express roads.
+3. When the costs of constructing local and express roads are comparable.
 
 <!-- GETTING STARTED -->
 ## 🚀 Getting started
