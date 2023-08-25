@@ -1,5 +1,5 @@
 
-## Table of contents
+## 📑 Table of contents
 * [About the project](#about-the-project)
 * [Getting started](#getting-started)
 * [Contributing](#contributing)
@@ -7,13 +7,13 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About the project
+## 🏙️ About the project
 
 
 
 
 <!-- GETTING STARTED -->
-## Getting started
+## 🚀 Getting started
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -49,7 +49,7 @@ See the [open issues](https://github.com/speeder-coder/Road-Planning/issues) for
 
 
 <!-- CONTRIBUTING -->
-## Contributing
+## 🤝 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -63,7 +63,7 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 <!-- CONTACT -->
-## Contact
+## 📞 Contact
 
 Angelina Momin - amomin2630@outlook.com
 
