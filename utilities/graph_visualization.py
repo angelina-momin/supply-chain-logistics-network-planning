@@ -71,7 +71,7 @@ def draw_colored_graph(graph: nx.Graph, nodes_coords: Dict[Any, Tuple[float, flo
     
     nx.draw_networkx(
         graph,
-        node_color= list(map(lambda node: color_node(node, graph), graph.nodes)),
+        node_color= list(map(lambda node: get_color_node(node, graph), graph.nodes)),
         edge_color= list(map(lambda edge: get_edge_color(edge, graph), graph.edges)),
         pos = nodes_coords,
         with_labels = True
