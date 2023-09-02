@@ -74,11 +74,11 @@ and a central distribution hub.
 - The coordinates of the main distribution center `(x,y)`.
 
 ### 📄 Outputs:
-- A list of planned local roads.
-- A list of planned express roads.
-- Total length of the planned local roads.
-- Total length of the planned express roads.
-- A visualization of the proposed solution.
+- A list of established local routes.
+- A list of planned express routes.
+- Total distance of planned local routes.
+- Total distance of planned express routes.
+- Visualization of the logistics network.
 
 <!-- GAME RULES -->
 ## ⚙️ Game Rules:
