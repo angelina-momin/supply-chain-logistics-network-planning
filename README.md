@@ -1,6 +1,8 @@
 # SUPPLY CHAIN LOGISTICS NETWORK README
 ## 📑 Table of contents
+
 - [📦 Introduction](#-introduction)
+  - [🏢 Types of Buildings](#-buildings)
   - [🚚 Types of Transportation Routes](#-road-types)
 - [🖥️ Computational Task](#-computational-task)
   - [🎯 Objective](#-objective)
@@ -14,11 +16,27 @@
 - [📞 Contact](#-contact)
 
 
-<!-- ABOUT THE PROJECT -->
-## 🏙️ About the project
-The project tackles a town road planning problem. In a newly built town with houses, shopping malls, and a centralized city center, roads are the essential backbone that determine its livability and functionality. As urban planners, the task is to intelligently lay down the roads, optimizing for cost and accessibility.
+<!-- INTRODUCTION -->
+## 📦 Introduction
+This project addresses the complex challenges associated with supply chain logistics for multinational corporations. 
+It offers a solution that strategically plans both local and express delivery routes connecting factories, warehouses, 
+and a central distribution hub.
 
-### 🛣️ Road Types:
+The codebase enables businesses to:
+
+  🗺️ Design Efficient Routes: Determine the most efficient local and express routes between factories, warehouses, 
+  and the main distribution center.
+
+  📊 Optimize Costs: Significantly reduce transportation costs by finding the shortest possible routes that 
+  meet all business constraints.
+
+  ⏲️ Speed Up Deliveries: By optimizing routes, the code ensures that products move through the supply chain as 
+  quickly as possible, reducing lead times.
+
+  🌿 Minimize Environmental Impact: The optimized routes are designed to minimize the distance traveled, 
+  reducing the carbon footprint of the logistics network.
+
+### 🚚 Types of Transportation Routes:
 
 1. **Local Roads**: 
    - Connect houses to other houses.
