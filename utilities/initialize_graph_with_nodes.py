@@ -20,6 +20,7 @@ def initialize_graph_with_nodes(
         nx.Graph: A networkx graph containing all the nodes
     """
 
+    # * Create dictionary of points
     factory_nodes = {
         f"F{index}": coords for index, coords in enumerate(list_factory_coords)
     }
@@ -34,6 +35,8 @@ def initialize_graph_with_nodes(
 
     # Add nodes with their attributes
     for node, coords in all_nodes.items():
+
+        # Add building_type
         if node == "DC":
             building_type = "distribution center"
         elif node.startswith("W"):
