@@ -2,8 +2,8 @@
 ## 📑 Table of contents
 
 - [📦 Introduction](#-introduction)
-  - [🏢 Types of Buildings](#-buildings)
-  - [🚚 Types of Transportation Routes](#-road-types)
+  - [🏢 Types of Buildings](#-types-of-buildings)
+  - [🚚 Types of Transportation Routes](#-types-of-transportation-routes)
 - [🖥️ Computational Task](#-computational-task)
   - [🎯 Objective](#-objective)
   - [📌 Inputs](#-inputs)
@@ -36,15 +36,30 @@ The codebase enables businesses to:
   🌿 Minimize Environmental Impact: The optimized routes are designed to minimize the distance traveled, 
   reducing the carbon footprint of the logistics network.
 
+<!-- TYPES OF BUILDINGS -->
+### 🏢 Types of Buildings:
+
+1. Factories
+    Factories are the initial points in the supply chain where raw materials are transformed into products.
+
+2. Warehouses
+    Warehouses serve as storage centers where products from factories are stored temporarily before 
+    being shipped to the distribution center or directly to the consumers.
+    
+3. Distribution Center:
+    The main distribution center acts as a hub that receives products from various warehouses and 
+    factories and redistributes them to the final consumer locations.
+
+<!-- TYPES OF TRANSPORTATION ROUTES -->
 ### 🚚 Types of Transportation Routes:
 
-1. **Local Roads**: 
-   - Connect houses to other houses.
-   - Link houses to malls.
-   
-2. **Express Roads**:
-   - Bridge malls with other malls.
-   - Route malls to the city center.
+1. Local Routes:
+    - Connect factories to their nearest warehouses.
+    - Link factories with other factories for component sharing.
+
+2. Express Routes:
+    - Connect warehouses to other warehouses for stock balancing.
+    - Link each warehouse to the main distribution center.
 
 <!-- ALGORITHMIC DESIGN -->
 ## 🖥️ The Algorithmic Design
