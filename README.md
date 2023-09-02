@@ -1,8 +1,7 @@
-# ROAD PLANNING PROJECT README
-
+# SUPPLY CHAIN LOGISTICS NETWORK README
 ## 📑 Table of contents
-- [🏙️ Introduction](#-introduction)
-  - [🛣️ Road Types](#-road-types)
+- [📦 Introduction](#-introduction)
+  - [🚚 Types of Transportation Routes](#-road-types)
 - [🖥️ Computational Task](#-computational-task)
   - [🎯 Objective](#-objective)
   - [📌 Inputs](#-inputs)
