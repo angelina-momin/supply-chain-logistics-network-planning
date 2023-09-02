@@ -8,7 +8,7 @@
   - [🎯 Objective](#-objective)
   - [📌 Inputs](#-inputs)
   - [📄 Outputs](#-outputs)
-- [⚙️ Game Rules](#-game-rules)
+- [⚙️ Rules](#-rules)
 - [💡 Considerations for Optimization](#-considerations-for-optimization)
 - [📈 Visualization](#-visualization)
 - [🚀 Getting Started](#-getting-started)
@@ -66,7 +66,8 @@ The codebase enables businesses to:
 
 ### 🎯 Objective:
 Develop an algorithm that efficiently plans the routes connecting factories, warehouses, 
-and a central distribution hub.
+and a central distribution hub such that the total length of routes is minimized, 
+subsequently reducing fuel costs.
 
 ### 📌 Inputs:
 - A set of `N` factory coordinates `(x,y)`.
@@ -80,15 +81,16 @@ and a central distribution hub.
 - Total distance of planned express routes.
 - Visualization of the logistics network.
 
-<!-- GAME RULES -->
+<!-- RULES -->
 ## ⚙️ Game Rules:
 
-- **Connectivity**: Every house must connect to every other house.
-- **Access to Amenities**: Each house should have a route to at least one mall.
-- **Central Access**: Every house must have a road leading to the city center.
-- **Travel Definition**: Traveling encompasses moving via local or express roads, and possibly via other houses or malls as intermediaries.
-- **Mall Requirement**: Not all malls need a connection.
-- **Size Constraints**: Both M and N are expected to be of the order of 10.
+- **Inter-factory Connectivity**: Every factory must connect to every other factor for efficient component sharing.
+- **Factory-warehouse Connectivity**: Each factory must be connected to at least one warehouse to ensure production 
+outputs reach storage.
+- **Access of warehouse to distribution center**: Every warehouse must have a direct or indirect connection to the main
+ distribution center.
+- **Inter-warehouse Connectivity**: Not all warehouses need to be connected to each other.
+- **Size Constraints**: Both M and N are expected to be of the order of 1.
 
 <!-- CONSIDERATIONS FOR OPTIMIZATION -->
 ## 💡 Considerations for Optimization:
