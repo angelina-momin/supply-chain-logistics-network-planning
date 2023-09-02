@@ -96,9 +96,9 @@ outputs reach storage.
 ## 💡 Considerations for Optimization:
 
 The algorithm should optimize the road planning based on the following scenarios:
-1. When local roads are much cheaper to build than express roads.
-2. When local roads are much more expensive than express roads.
-3. When the costs of constructing local and express roads are comparable.
+1. When local routes are much cheaper to build than express routes.
+2. When local routes are much more expensive than express routes.
+3. When the costs of constructing local and express routes are comparable.
 
 <!-- GETTING STARTED -->
 ## 🚀 Getting started
