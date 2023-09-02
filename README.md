@@ -45,7 +45,7 @@ The codebase enables businesses to:
 2. Warehouses
     Warehouses serve as storage centers where products from factories are stored temporarily before 
     being shipped to the distribution center or directly to the consumers.
-    
+
 3. Distribution Center:
     The main distribution center acts as a hub that receives products from various warehouses and 
     factories and redistributes them to the final consumer locations.
@@ -65,12 +65,13 @@ The codebase enables businesses to:
 ## 🖥️ The Algorithmic Design
 
 ### 🎯 Objective:
-Develop an algorithm that efficiently plans the roads, considering various cost scenarios.
+Develop an algorithm that efficiently plans the routes connecting factories, warehouses, 
+and a central distribution hub.
 
 ### 📌 Inputs:
-- `N` house coordinates `(x,y)`.
-- `M` mall coordinates `(x,y)`.
-- City center coordinates `(x,y)`.
+- A set of `N` factory coordinates `(x,y)`.
+- A set of `M` warehouse coordinates `(x,y)`.
+- The coordinates of the main distribution center `(x,y)`.
 
 ### 📄 Outputs:
 - A list of planned local roads.
