@@ -1,22 +1,26 @@
+from typing import Dict
+
 import networkx as nx
 import math
 
 def create_connected_graph(
     initial_graph_with_nodes: nx.Graph,
-    cost_per_km_local_road: float,
-    cost_per_km_express_road: float,
+    dict_route_costs_per_km: Dict[str, float]
 ) -> nx.Graph:
     """
     Create a weighted complete graph based on an initial graph with nodes.
     
     Args:
         initial_graph_with_nodes (nx.Graph): Initial graph with nodes, but no edges.
-        cost_per_km_local_road (float): Cost per km of local roads.
-        cost_per_km_express_road (float): Cost per km of express roads.
+        dict_route_costs_per_km (Dict[str, float]): Dictionary containing the costs for each route type.
         
     Returns:
         nx.Graph: Graph with nodes and weighted edges.
     """
+
+    # * Unpacking costs per km of each road type
+    cost_per_km_local_route = dict_route_costs_per_km["local"]
+    cost_per_km_express_route = dict_route_costs_per_km["express"]
 
     # * Looping over each node and creating a weighted edge to every other node
     for source, source_data in initial_graph_with_nodes.nodes(data=True):
@@ -40,7 +44,7 @@ def create_connected_graph(
                     source,
                     target,
                     road="local",
-                    weight=eucl_dist * cost_per_km_local_road,
+                    weight=eucl_dist * cost_per_km_local_route,
                 )
 
             # * Adding edges for express roads
@@ -49,7 +53,7 @@ def create_connected_graph(
                     source,
                     target,
                     road="express",
-                    weight=eucl_dist * cost_per_km_express_road,
+                    weight=eucl_dist * cost_per_km_express_route,
                 )
 
     return initial_graph_with_nodes
