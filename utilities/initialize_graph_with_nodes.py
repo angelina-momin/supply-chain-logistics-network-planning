@@ -1,6 +1,7 @@
 import numpy as np
 import networkx as nx
 
+from utilities.graph_visualization import get_color_node
 
 def initialize_graph_with_nodes(
     list_factory_coords: np.ndarray,
@@ -38,12 +39,12 @@ def initialize_graph_with_nodes(
 
         # Add building_type
         if node == "DC":
-            building_type = "distribution center"
+            building_type = "distribution_center"
         elif node.startswith("W"):
             building_type = "warehouse"
         else:
             building_type = "factory"
 
-        network_graph.add_node(node, pos=coords, building_type=building_type)
+        network_graph.add_node(node, pos=coords, building_type=building_type, color=get_color_node(building_type))
 
     return network_graph
