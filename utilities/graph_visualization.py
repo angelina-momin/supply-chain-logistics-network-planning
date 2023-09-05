@@ -2,32 +2,28 @@ from typing import Any, Dict, Tuple, Union
 
 import networkx as nx
 
-def get_color_node(node: Any, graph: nx.Graph)-> str:
+def get_color_node(building_type: str)-> str:
     """
-    Determine the color of a node based on its building type attribute. 
-    Houses are assigned the color green, mall nodes are red and city centers are blue.
+    Returns the color of a node giving the building type.
 
     Args:
-        node (Any): The node.
-        graph (nx.Graph): The networkx graph where the node is present.
+        building_type (str): The building type.
 
     Returns:
         str: The letter representing the color of the node
     """
     # * Dictionary with keys being the building type and values being the node colors.
     dict_building_node_colors = {
-        "house": "g", # green
-        "mall": "r", # red
-        "city_center": "b" # blue
+        "factory": "g", # green
+        "warehouse": "r", # red
+        "distribution_center": "b" # blue
     }
 
-    node_attrs = graph.nodes[node]
-
     # * Raising error if node does not have building_type attribute
-    if "building_type" not in node_attrs:
-        raise KeyError(f"Node {node} does not have the 'building_type' attribute.")
+    if building_type not in dict_building_node_colors.keys():
+        raise KeyError(f"Unrecognized building type has been passed: {building_type}.")
     
-    building_type = node_attrs["building_type"]
+    # * Returning the associated color
     return dict_building_node_colors["building_type"]
 
 def get_edge_color(edge: Tuple[Any, Any], graph: nx.Graph) -> str:
