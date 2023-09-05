@@ -1,13 +1,14 @@
-# ROAD PLANNING PROJECT README
-
+# SUPPLY CHAIN LOGISTICS NETWORK README
 ## 📑 Table of contents
-- [🏙️ Introduction](#-introduction)
-  - [🛣️ Road Types](#-road-types)
+
+- [📦 Introduction](#-introduction)
+  - [🏢 Types of Buildings](#-types-of-buildings)
+  - [🚚 Types of Transportation Routes](#-types-of-transportation-routes)
 - [🖥️ Computational Task](#-computational-task)
   - [🎯 Objective](#-objective)
   - [📌 Inputs](#-inputs)
   - [📄 Outputs](#-outputs)
-- [⚙️ Game Rules](#-game-rules)
+- [⚙️ Rules](#-rules)
 - [💡 Considerations for Optimization](#-considerations-for-optimization)
 - [📈 Visualization](#-visualization)
 - [🚀 Getting Started](#-getting-started)
@@ -15,55 +16,89 @@
 - [📞 Contact](#-contact)
 
 
-<!-- ABOUT THE PROJECT -->
-## 🏙️ About the project
-The project tackles a town road planning problem. In a newly built town with houses, shopping malls, and a centralized city center, roads are the essential backbone that determine its livability and functionality. As urban planners, the task is to intelligently lay down the roads, optimizing for cost and accessibility.
+<!-- INTRODUCTION -->
+## 📦 Introduction
+This project addresses the complex challenges associated with supply chain logistics for multinational corporations. 
+It offers a solution that strategically plans both local and express delivery routes connecting factories, warehouses, 
+and a central distribution hub.
 
-### 🛣️ Road Types:
+The codebase enables businesses to:
 
-1. **Local Roads**: 
-   - Connect houses to other houses.
-   - Link houses to malls.
-   
-2. **Express Roads**:
-   - Bridge malls with other malls.
-   - Route malls to the city center.
+  🗺️ Design Efficient Routes: Determine the most efficient local and express routes between factories, warehouses, 
+  and the main distribution center.
+
+  📊 Optimize Costs: Significantly reduce transportation costs by finding the shortest possible routes that 
+  meet all business constraints.
+
+  ⏲️ Speed Up Deliveries: By optimizing routes, the code ensures that products move through the supply chain as 
+  quickly as possible, reducing lead times.
+
+  🌿 Minimize Environmental Impact: The optimized routes are designed to minimize the distance traveled, 
+  reducing the carbon footprint of the logistics network.
+
+<!-- TYPES OF BUILDINGS -->
+### 🏢 Types of Buildings:
+
+1. Factories
+    Factories are the initial points in the supply chain where raw materials are transformed into products.
+
+2. Warehouses
+    Warehouses serve as storage centers where products from factories are stored temporarily before 
+    being shipped to the distribution center or directly to the consumers.
+
+3. Distribution Center:
+    The main distribution center acts as a hub that receives products from various warehouses and 
+    factories and redistributes them to the final consumer locations.
+
+<!-- TYPES OF TRANSPORTATION ROUTES -->
+### 🚚 Types of Transportation Routes:
+
+1. Local Routes:
+    - Connect factories to their nearest warehouses.
+    - Link factories with other factories for component sharing.
+
+2. Express Routes:
+    - Connect warehouses to other warehouses for stock balancing.
+    - Link each warehouse to the main distribution center.
 
 <!-- ALGORITHMIC DESIGN -->
 ## 🖥️ The Algorithmic Design
 
 ### 🎯 Objective:
-Develop an algorithm that efficiently plans the roads, considering various cost scenarios.
+Develop an algorithm that efficiently plans the routes connecting factories, warehouses, 
+and a central distribution hub such that the total length of routes is minimized, 
+subsequently reducing fuel costs.
 
 ### 📌 Inputs:
-- `N` house coordinates `(x,y)`.
-- `M` mall coordinates `(x,y)`.
-- City center coordinates `(x,y)`.
+- A set of `N` factory coordinates `(x,y)`.
+- A set of `M` warehouse coordinates `(x,y)`.
+- The coordinates of the main distribution center `(x,y)`.
 
 ### 📄 Outputs:
-- A list of planned local roads.
-- A list of planned express roads.
-- Total length of the planned local roads.
-- Total length of the planned express roads.
-- A visualization of the proposed solution.
+- A list of established local routes.
+- A list of planned express routes.
+- Total distance of planned local routes.
+- Total distance of planned express routes.
+- Visualization of the logistics network.
 
-<!-- GAME RULES -->
+<!-- RULES -->
 ## ⚙️ Game Rules:
 
-- **Connectivity**: Every house must connect to every other house.
-- **Access to Amenities**: Each house should have a route to at least one mall.
-- **Central Access**: Every house must have a road leading to the city center.
-- **Travel Definition**: Traveling encompasses moving via local or express roads, and possibly via other houses or malls as intermediaries.
-- **Mall Requirement**: Not all malls need a connection.
-- **Size Constraints**: Both M and N are expected to be of the order of 10.
+- **Inter-factory Connectivity**: Every factory must connect to every other factor for efficient component sharing.
+- **Factory-warehouse Connectivity**: Each factory must be connected to at least one warehouse to ensure production 
+outputs reach storage.
+- **Access of warehouse to distribution center**: Every warehouse must have a direct or indirect connection to the main
+ distribution center.
+- **Inter-warehouse Connectivity**: Not all warehouses need to be connected to each other.
+- **Size Constraints**: Both M and N are expected to be of the order of 1.
 
 <!-- CONSIDERATIONS FOR OPTIMIZATION -->
 ## 💡 Considerations for Optimization:
 
 The algorithm should optimize the road planning based on the following scenarios:
-1. When local roads are much cheaper to build than express roads.
-2. When local roads are much more expensive than express roads.
-3. When the costs of constructing local and express roads are comparable.
+1. When local routes are much cheaper to build than express routes.
+2. When local routes are much more expensive than express routes.
+3. When the costs of constructing local and express routes are comparable.
 
 <!-- GETTING STARTED -->
 ## 🚀 Getting started
