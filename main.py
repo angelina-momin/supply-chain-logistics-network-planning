@@ -10,7 +10,7 @@ from utils.create_connected_graph import create_connected_graph
 from utils.initialize_graph_with_nodes import initialize_graph_with_nodes
 from utils.remove_non_terminals_from_metric_closure import remove_non_terminals_from_metric_closure
 from utils.replace_edges_with_shortest_routes import replace_edges_with_shortest_routes
-
+from utils.graph_visualization import create_and_save_graph
 
 # Load utilities and other functions
 dict_route_costs_per_km = {"local": 5, "express": 1}
@@ -19,6 +19,7 @@ def city_planning(
     list_factory_coords: np.ndarray,
     list_warehouse_coords: np.ndarray,
     list_distribution_center_coords: np.ndarray,
+    figure_filename: str
 ):
     """
     ---------------
@@ -70,13 +71,7 @@ def city_planning(
     mst_only_terminals_graph = nx.minimum_spanning_tree(metric_closure_only_terminals_graph, algorithm='prim')
 
     # * Replaces the edges of the MST with the shortest routes    
-    steiner_tree = replace_edges_with_shortest_routes(mst_only_terminals_graph, connected_graph)
+    steiner_tree_graph = replace_edges_with_shortest_routes(mst_only_terminals_graph, connected_graph)
 
-    ## STEP 2) Visualization
-    #plt.figure(figsize=(40, 40)).suptitle("Rahjeet's and Krishna's optimal tree")
-    draw_with_color(Graph_steiner_tree, all_nodes_with_coords, nodes_attributes)
-
-    # plt.set_xticks(range(0, 200))
-    # plt.set_yticks(range(0, 200))
-
-    plt.show()
+    # * Create and save visualization
+    create_and_save_graph(steiner_tree_graph, figure_filename)
