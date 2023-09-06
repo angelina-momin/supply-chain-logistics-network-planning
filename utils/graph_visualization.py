@@ -41,15 +41,17 @@ def get_edge_color(edge: Tuple[Any, Any], graph: nx.Graph) -> str:
         str: Color code ('0' for black or 'r' for red).
     """
     node1, node2 = edge
+    building_type1 = graph.nodes[node1]["building_type"]
+    building_type2 = graph.nodes[node2]["building_type"]
 
-    node1_attr, node2_attr = graph.nodes[node1], graph.nodes[node2]
+    # * Local routes (connecting factories and warehouses) are colored black.
+    if (building_type1 == "factory" and building_type2 == "warehouse") or \
+       (building_type1 == "warehouse" and building_type2 == "factory") or \
+       (building_type1 == "factory" and building_type2 == "factory"):
+        return "0"
 
-    # Local roads (connecting house and house or house and mall) are colored black.
-    if node1_attr["building_type"] == "house" or node2_attr["building_type"] == "house":
-        return "0"  # black
-
-    # Express roads (not connecting houses) are colored red.
-    return "r"  # red
+    # * Express routes (not connecting houses) are colored red.
+    return "r"
 
 
 def create_and_save_graph(
