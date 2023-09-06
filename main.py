@@ -2,22 +2,22 @@
 
 import numpy as np
 import networkx as nx
+from networkx.algorithms.approximation.steinertree import steiner_tree
 import math
 
-from Steps.create_graph_with_roads import create_graph_with_roads
+from utilities.create_connected_graph import create_connected_graph
+from utilities.initialize_graph_with_nodes import initialize_graph_with_nodes
 from Steps.create_steiner_tree import create_steiner_tree_roads
-from Utilities.graph_visuals_funcs import color_node, draw_with_color, color_edge
 
-from networkx.algorithms.approximation.steinertree import steiner_tree
 
 # Load utilities and other functions
+dict_route_costs_per_km = {"local": 5, "express": 1}
 
-COST_PER_KM_LOCAL = 5
-COST_PER_KM_EXPRESS = 1
-
-# FUNCTION
-
-def city_planning(coords_houses, coords_malls, coords_city_center):
+def city_planning(
+    list_factory_coords: np.ndarray,
+    list_warehouse_coords: np.ndarray,
+    list_distribution_center_coords: np.ndarray,
+):
     """
     ---------------
     Input & Output
@@ -49,22 +49,9 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     
     """
 
-    house_nodes_with_coords = { f"H{index}": coords for index, coords in enumerate(coords_houses)}
-    mall_nodes_with_coords = { f"M{index}": coords for index, coords in enumerate(coords_malls)}
-    center_node_with_coords = { "C": coords_city_center }
-    all_nodes_with_coords = house_nodes_with_coords | mall_nodes_with_coords | center_node_with_coords
+    initial_graph = initialize_graph_with_nodes(list_factory_coords, list_warehouse_coords, list_distribution_center_coords)
 
-    first_graph = nx.Graph()
-
-    first_graph.add_nodes_from(list(mall_nodes_with_coords.keys()), building_type="mall")
-    first_graph.add_nodes_from(list(house_nodes_with_coords.keys()), building_type="house")
-    first_graph.add_node("C", building_type="center")
-
-    nodes_attributes = first_graph.nodes()
-
-    # STEP 0) Create a regular graph with all the possible local_roads and express_roads
-
-    Graph_all_roads = create_graph_with_roads(first_graph, all_nodes_with_coords, COST_PER_KM_LOCAL, COST_PER_KM_EXPRESS)
+    connected_graph = create_connected_graph(initial_graph, dict_route_costs_per_km)
 
     # STEP 1) Create a steiner tree
     # Terminal_nodes: all houses, city_centre
@@ -73,7 +60,7 @@ def city_planning(coords_houses, coords_malls, coords_city_center):
     terminals = list(house_nodes_with_coords.keys() | center_node_with_coords.keys())
 
     # Creating the steiner tree
-    Graph_steiner_tree = create_steiner_tree_roads(Graph_all_roads, terminals)
+    Graph_steiner_tree = create_steiner_tree_roads(connected_graph, terminals)
 
     ## STEP 2) Visualization
     #plt.figure(figsize=(40, 40)).suptitle("Rahjeet's and Krishna's optimal tree")
