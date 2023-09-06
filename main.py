@@ -6,10 +6,10 @@ from networkx.algorithms.approximation.steinertree import steiner_tree
 from networkx.algorithms.approximation.steinertree import metric_closure
 import math
 
-from utilities.create_connected_graph import create_connected_graph
-from utilities.initialize_graph_with_nodes import initialize_graph_with_nodes
-from utilities.remove_non_terminals_from_metric_closure import remove_non_terminals_from_metric_closure
-from Steps.create_steiner_tree import create_steiner_tree_roads
+from utils.create_connected_graph import create_connected_graph
+from utils.initialize_graph_with_nodes import initialize_graph_with_nodes
+from utils.remove_non_terminals_from_metric_closure import remove_non_terminals_from_metric_closure
+from utils.replace_edges_with_shortest_routes import replace_edges_with_shortest_routes
 
 
 # Load utilities and other functions
@@ -69,14 +69,8 @@ def city_planning(
     # The MST will connect all the terminal nodes without any cycles and minimum possible total edge weight
     mst_only_terminals_graph = nx.minimum_spanning_tree(metric_closure_only_terminals_graph, algorithm='prim')
 
-    # STEP 1) Create a steiner tree
-    # Terminal_nodes: all houses, city_centre
-    # Optional_nodes: malls
-
-    terminals = list(house_nodes_with_coords.keys() | center_node_with_coords.keys())
-
-    # Creating the steiner tree
-    Graph_steiner_tree = create_steiner_tree_roads(connected_graph, terminals)
+    # * Replaces the edges of the MST with the shortest routes    
+    steiner_tree = replace_edges_with_shortest_routes(mst_only_terminals_graph, connected_graph)
 
     ## STEP 2) Visualization
     #plt.figure(figsize=(40, 40)).suptitle("Rahjeet's and Krishna's optimal tree")
