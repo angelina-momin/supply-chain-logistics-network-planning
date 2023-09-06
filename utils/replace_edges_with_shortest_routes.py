@@ -3,7 +3,7 @@ from typing import List, Tuple
 import networkx as nx
 
 
-def replace_with_shortest_routes(
+def replace_edges_with_shortest_routes(
     mst_only_terminals_graph: nx.Graph, connected_graph: nx.Graph
 ) -> nx.Graph:
     """Replaces the edges in MST with only terminals with the shortest routes.
