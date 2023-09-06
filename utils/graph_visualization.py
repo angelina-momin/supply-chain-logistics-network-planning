@@ -1,3 +1,4 @@
+import os
 from typing import Any, Tuple
 
 import networkx as nx
@@ -53,7 +54,8 @@ def get_edge_color(edge: Tuple[Any, Any], graph: nx.Graph) -> str:
 
 def create_and_save_graph(
     graph: nx.Graph,
-    file_name: str = "graph_visual.png"
+    file_name: str = "graph_visual.png",
+    save_file_directory: str = "data/fig/"
 ) -> None:
     """
     Create and save a graph with nodes and edges colored based on their attributes.
@@ -61,10 +63,15 @@ def create_and_save_graph(
     Args:
         graph (nx.Graph): The graph to be drawn.
         file_name (str): The name of the file where the graph will be saved.
+        save_file_directory (str): The directory where the png is to be saved in.
 
     Returns:
         None
     """
+
+    # * Create directory if it does not exist
+    if not os.path.exists(save_file_directory):
+        os.makedirs(save_file_directory)
 
     node_colors = [node['color'] for node in graph.nodes]
     edge_colors = [get_edge_color(edge, graph) for edge in graph.edges]
@@ -78,5 +85,5 @@ def create_and_save_graph(
     )
 
     # * Save the plot to a file
-    plt.savefig(file_name)
+    plt.savefig(os.path.join(save_file_directory, file_name))
     plt.close()
