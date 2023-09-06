@@ -8,6 +8,7 @@ import math
 
 from utilities.create_connected_graph import create_connected_graph
 from utilities.initialize_graph_with_nodes import initialize_graph_with_nodes
+from utilities.remove_non_terminals_from_metric_closure import remove_non_terminals_from_metric_closure
 from Steps.create_steiner_tree import create_steiner_tree_roads
 
 
@@ -49,6 +50,7 @@ def city_planning(
     ---------------
     
     """
+    terminal_buildings = ["distribution_center", "factory"]
 
     initial_graph = initialize_graph_with_nodes(list_factory_coords, list_warehouse_coords, list_distribution_center_coords)
 
@@ -59,6 +61,9 @@ def city_planning(
     # The metric closure of the connected graph is a complete graph where each edge which each edge is weighted by the 
     # shortest path distance between the nodes in the connected graph
     metric_closure_graph = metric_closure(connected_graph)
+
+    # * Removing all non-terminal nodes from the metric closure graph
+    metric_closure_graph_only_terminals = remove_non_terminals_from_metric_closure(metric_closure_graph, terminal_buildings)
 
     # STEP 1) Create a steiner tree
     # Terminal_nodes: all houses, city_centre
