@@ -51,6 +51,10 @@ def replace_edges_with_shortest_routes(
             nx.add_path(steiner_graph, subpath_to_first_common_node)
             nx.add_path(steiner_graph, subpath_from_last_common_node)
 
+    # * Copying node attributes
+    # The functions above create graphs without the node attributes
+    nx.set_node_attributes(steiner_graph, connected_graph.nodes)
+
     return steiner_graph
 
 
