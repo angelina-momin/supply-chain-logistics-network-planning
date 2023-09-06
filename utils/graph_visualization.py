@@ -26,7 +26,7 @@ def get_color_node(building_type: str) -> str:
         raise KeyError(f"Unrecognized building type has been passed: {building_type}.")
 
     # * Returning the associated color
-    return dict_building_node_colors["building_type"]
+    return dict_building_node_colors[building_type]
 
 
 def get_edge_color(edge: Tuple[Any, Any], graph: nx.Graph) -> str:
@@ -73,7 +73,7 @@ def create_and_save_graph(
     if not os.path.exists(save_file_directory):
         os.makedirs(save_file_directory)
 
-    node_colors = [node['color'] for node in graph.nodes]
+    node_colors = [graph.nodes[node]['color'] for node in graph.nodes]
     edge_colors = [get_edge_color(edge, graph) for edge in graph.edges]
 
     nx.draw_networkx(

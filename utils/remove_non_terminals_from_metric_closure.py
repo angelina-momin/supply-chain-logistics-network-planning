@@ -15,6 +15,6 @@ def remove_non_terminals_from_metric_closure(metric_closure_graph: nx.Graph, ter
     Returns:
         nx.Graph: Graph with only the terminal nodes
     """    
-    non_terminal_nodes = [node for node in metric_closure_graph.nodes if node.building_type not in terminal_buildings]
-
-    return metric_closure_graph.remove_nodes_from(non_terminal_nodes)
+    non_terminal_nodes = [node for node in metric_closure_graph.nodes if metric_closure_graph.nodes[node]['building_type'] not in terminal_buildings]
+    metric_closure_graph.remove_nodes_from(non_terminal_nodes)
+    return metric_closure_graph

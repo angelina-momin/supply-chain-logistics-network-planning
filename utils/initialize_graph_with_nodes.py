@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
 
-from utilities.graph_visualization import get_color_node
+from utils.graph_visualization import get_color_node
 
 def initialize_graph_with_nodes(
     list_factory_coords: np.ndarray,
