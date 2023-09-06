@@ -58,12 +58,16 @@ def city_planning(
     connected_graph = create_connected_graph(initial_graph, dict_route_costs_per_km)
 
     # * Creating metric closure of the connected graph
-    # The metric closure of the connected graph is a complete graph where each edge which each edge is weighted by the 
+    # The metric closure of the connected graph is a complete graph where each edge is weighted by the 
     # shortest path distance between the nodes in the connected graph
     metric_closure_graph = metric_closure(connected_graph)
 
     # * Removing all non-terminal nodes from the metric closure graph
-    metric_closure_graph_only_terminals = remove_non_terminals_from_metric_closure(metric_closure_graph, terminal_buildings)
+    metric_closure_only_terminals_graph = remove_non_terminals_from_metric_closure(metric_closure_graph, terminal_buildings)
+
+    # * Creating minimum spanning tree (MST) of the terminal nodes
+    # The MST will connect all the terminal nodes without any cycles and minimum possible total edge weight
+    mst_only_terminals_graph = nx.minimum_spanning_tree(metric_closure_only_terminals_graph, algorithm='prim')
 
     # STEP 1) Create a steiner tree
     # Terminal_nodes: all houses, city_centre
