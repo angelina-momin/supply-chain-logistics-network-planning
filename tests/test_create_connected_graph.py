@@ -48,6 +48,6 @@ def test_create_connected_graph_two_warehouses_graph_passed_return_graph_one_exp
 
     connected_graph = create_connected_graph(G, dict_route_costs)
     assert len(connected_graph.edges) == 1
-    assert connected_graph[1][2]['route'] == 'expressa' # Check route type
+    assert connected_graph[1][2]['route'] == 'express' # Check route type
     assert connected_graph[1][2]['weight'] == expected_edge_weight # Check edge weight
     
