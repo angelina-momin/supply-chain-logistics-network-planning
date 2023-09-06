@@ -15,41 +15,24 @@ from utils.graph_visualization import create_and_save_graph
 # Load utilities and other functions
 dict_route_costs_per_km = {"local": 5, "express": 1}
 
-def city_planning(
+def suppy_chain_network_planning(
     list_factory_coords: np.ndarray,
     list_warehouse_coords: np.ndarray,
     list_distribution_center_coords: np.ndarray,
     figure_filename: str
-):
+)-> None:
     """
-    ---------------
-    Input & Output
-    ---------------
-    
-    Input:     
-    coords_houses- set of housing coordinates
-    coords_malls- set of mall coordinates
-    coords_city_center- city central coordinates
-    
-    Output:
-    steiner_tree- networkx graph which is a list of nodes and edges along with their weights
-    visual_steiner_tree- visualization of the steiner tree
-    
-    ---------------
-    Description
-    ---------------
-    
-    Creates urban planning with roads connecting houses, city center and optionally malls such that 
-    the total weight of the network, hence the construction costs are minimized. 
-    
-    The function essentially creates a Steiner tree with:
-        - Terminal node set = all houses and the city center
-        - Steiner node set (optional nodes) = all malls
-    
-    ---------------
-    Variables
-    ---------------
-    
+    Solves the supply chain network planning problem given a list of coords of factory, warehouse and distribution
+    center coords.
+
+    Args:
+        list_factory_coords (np.ndarray): Array containing the coordinates of factories.
+        list_warehouse_coords (np.ndarray): Array containing the coordinates of warehouses.
+        list_distribution_center_coords (np.ndarray): Array containing the coordinates of distribution centers.
+        figure_filename (str): The name of the file where the Steiner tree will be visualized and saved.
+
+    Returns:
+        None
     """
     terminal_buildings = ["distribution_center", "factory"]
 
