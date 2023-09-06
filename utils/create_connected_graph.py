@@ -38,21 +38,21 @@ def create_connected_graph(
             source_type = source_data.get('building_type')
             target_type = target_data.get('building_type')
 
-            # * Adding edges for local roads
+            # * Adding edges for local routes
             if source_type in ["factory", "warehouse"] and target_type == "factory":
                 initial_graph_with_nodes.add_edge(
                     source,
                     target,
-                    road="local",
+                    route="local",
                     weight=eucl_dist * cost_per_km_local_route,
                 )
 
-            # * Adding edges for express roads
+            # * Adding edges for express routes
             elif source_type in ["warehouse", "distribution_center"] and target_type == "warehouse":
                 initial_graph_with_nodes.add_edge(
                     source,
                     target,
-                    road="express",
+                    route="express",
                     weight=eucl_dist * cost_per_km_express_route,
                 )
 
