@@ -19,7 +19,8 @@ def suppy_chain_network_planning(
     list_factory_coords: np.ndarray,
     list_warehouse_coords: np.ndarray,
     list_distribution_center_coords: np.ndarray,
-    figure_filename: str
+    figure_filename: str = "graph_visual.png",
+    save_file_directory: str = "data/fig/"
 )-> None:
     """
     Solves the supply chain network planning problem given a list of coords of factory, warehouse and distribution
@@ -30,6 +31,7 @@ def suppy_chain_network_planning(
         list_warehouse_coords (np.ndarray): Array containing the coordinates of warehouses.
         list_distribution_center_coords (np.ndarray): Array containing the coordinates of distribution centers.
         figure_filename (str): The name of the file where the Steiner tree will be visualized and saved.
+        save_file_directory (str): The directory where the png is to be saved in.
 
     Returns:
         None
@@ -45,6 +47,9 @@ def suppy_chain_network_planning(
     # The metric closure of the connected graph is a complete graph where each edge is weighted by the 
     # shortest path distance between the nodes in the connected graph
     metric_closure_graph = metric_closure(connected_graph)
+    # * Copying node attributes
+    # The functions above create graphs without the node attributes
+    nx.set_node_attributes(metric_closure_graph, connected_graph.nodes)
 
     # * Removing all non-terminal nodes from the metric closure graph
     metric_closure_only_terminals_graph = remove_non_terminals_from_metric_closure(metric_closure_graph, terminal_buildings)
@@ -57,4 +62,4 @@ def suppy_chain_network_planning(
     steiner_tree_graph = replace_edges_with_shortest_routes(mst_only_terminals_graph, connected_graph)
 
     # * Create and save visualization
-    create_and_save_graph(steiner_tree_graph, figure_filename)
+    create_and_save_graph(steiner_tree_graph, figure_filename, save_file_directory)
