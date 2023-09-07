@@ -1,10 +1,6 @@
-# PACKAGES
-
 import numpy as np
 import networkx as nx
-from networkx.algorithms.approximation.steinertree import steiner_tree
 from networkx.algorithms.approximation.steinertree import metric_closure
-import math
 
 from utils.create_connected_graph import create_connected_graph
 from utils.initialize_graph_with_nodes import initialize_graph_with_nodes
