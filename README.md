@@ -155,7 +155,7 @@ Don't forget to give the project a star! Thanks again!
 
 Angelina Momin - amomin2630@outlook.com
 
-Project Link: [https://github.com/speeder-coder/Road-Planning](https://github.com/speeder-coder/Road-Planning)
+Project Link: [https://github.com/speeder-coder/supply-chain-logistics-network-planning](https://github.com/speeder-coder/supply-chain-logistics-network-planning)
 
 
 
